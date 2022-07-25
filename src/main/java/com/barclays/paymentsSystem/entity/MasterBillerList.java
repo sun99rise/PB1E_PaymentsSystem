@@ -1,23 +1,20 @@
 package com.barclays.paymentssystem.entity;
 
 import javax.persistence.Entity;
-
-import org.springframework.stereotype.Component;
+import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-//@Entity
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Component
-public class AccountHolder {
-	
-	int accountNumber;
-    String email;
-	String name;
-	String address;
-	double currentBalance;
-	
+@Data
+public class MasterBillerList {
 
+	@Id
+	String BillerCode;
+	String name;
+	
 }
