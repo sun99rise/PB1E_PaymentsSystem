@@ -18,4 +18,6 @@ public interface BillRepo extends JpaRepository<Bill, Integer> {
 	
 	public Optional<Bill> findByPrimarKeyBillerCodeAndPrimarKeyConsumerNumberAndAccountNumberAndStatus(String billerCode, String consumerNumber, int accountNumber, String status );
 
+	public Optional<Bill> findByStatus(String status);
+	
 }
