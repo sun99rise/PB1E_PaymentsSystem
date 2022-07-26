@@ -13,12 +13,7 @@ import com.barclays.paymentssystem.entity.AccountHolder;
 @RequestMapping("/login")
 public class LoginController {
 	
-//	@GetMapping("/user")
-//	public ResponseEntity<String> userLogin(@RequestBody AccountHolder accountHolder ) {
-//		
-//		
-//		return ResponseEntity<String>;
-//	}
+
 	
 	@GetMapping("/manager")
 	public void managerLogin(@RequestBody AccountHolder accountHolder ) {

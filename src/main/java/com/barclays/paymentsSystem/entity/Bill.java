@@ -49,45 +49,48 @@ public class Bill {
 }
 
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-@Embeddable
-class PrimaryKeyForBill implements Serializable {
-	
-	@NotNull
-	String billerCode;
-	@NotNull
-	String consumerNumber;
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		PrimaryKeyForBill other = (PrimaryKeyForBill) obj;
-		if (billerCode == null) {
-			if (other.billerCode != null)
-				return false;
-		} else if (!billerCode.equals(other.billerCode))
-			return false;
-		if (consumerNumber == null) {
-			if (other.consumerNumber != null)
-				return false;
-		} else if (!consumerNumber.equals(other.consumerNumber))
-			return false;
-		return true;
-	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((billerCode == null) ? 0 : billerCode.hashCode());
-		result = prime * result + ((consumerNumber == null) ? 0 : consumerNumber.hashCode());
-		return result;
-	}
-	
-	
-}
+//@AllArgsConstructor
+//@NoArgsConstructor
+//@Data
+//@Embeddable
+//class PrimaryKeyForBill implements Serializable {
+//	
+//	@NotNull
+//	String billerCode;
+//	@NotNull
+//	String consumerNumber;
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		PrimaryKeyForBill other = (PrimaryKeyForBill) obj;
+//		if (billerCode == null) {
+//			if (other.billerCode != null)
+//				return false;
+//		} else if (!billerCode.equals(other.billerCode))
+//			return false;
+//		if (consumerNumber == null) {
+//			if (other.consumerNumber != null)
+//				return false;
+//		} else if (!consumerNumber.equals(other.consumerNumber))
+//			return false;
+//		return true;
+//	}
+//	@Override
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = 1;
+//		result = prime * result + ((billerCode == null) ? 0 : billerCode.hashCode());
+//		result = prime * result + ((consumerNumber == null) ? 0 : consumerNumber.hashCode());
+//		return result;
+//	}
+//	
+//	
+//}
+
+
+
