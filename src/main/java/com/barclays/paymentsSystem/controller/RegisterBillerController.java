@@ -15,22 +15,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.barclays.paymentssystem.entity.RegisteredBillers;
-import com.barclays.paymentssystem.service.RegisterBiller;
+import com.barclays.paymentssystem.service.RegisteredBiller;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 
+ * @author hp
+ *
+ */
+
 @Slf4j
 @RestController
-@RequestMapping("/registerBiller")
+@RequestMapping("/api/billers")
 public class RegisterBillerController {
 
 	@Autowired
-	RegisterBiller registerBiller;
+	RegisteredBiller registerBiller;
 
 	@PostMapping("/register")
-	public String addBiller(@RequestBody RegisteredBillers registeredBillers) {
+	public ResponseEntity<?> addBiller(@RequestBody RegisteredBillers registeredBillers) {
 
-		return registerBiller.registerBiller(registeredBillers);
+		return registerBiller.createRegisteredBiller (registeredBillers);
 
 	}
 
@@ -53,7 +59,7 @@ public class RegisterBillerController {
 
 	}
 	
-	@DeleteMapping("/deleteRegisteredBiller/{bill_sequence_id}")
+	@DeleteMapping("/deleteBiller/{bill_sequence_id}")
 	public ResponseEntity<?> removeBiller(@PathVariable String bill_sequence_id){
 		
 		String deleteStatus = registerBiller.removeRegisteredBiller(bill_sequence_id);
@@ -65,5 +71,7 @@ public class RegisterBillerController {
 		}
 		
 	}
+	
+	
 
 }

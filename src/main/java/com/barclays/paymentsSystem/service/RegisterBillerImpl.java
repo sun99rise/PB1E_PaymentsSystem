@@ -1,12 +1,11 @@
 package com.barclays.paymentssystem.service;
 
-import java.sql.ResultSet;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -18,20 +17,22 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 @Transactional
-public class RegisterBillerImpl implements RegisterBiller {
+public class RegisterBillerImpl implements RegisteredBiller {
 
 	@Autowired
 	RegisterBillerRepo registeredBillerRepo;
 
 	@Override
-	public String registerBiller(RegisteredBillers registeredBillers) {
+	public ResponseEntity<?> createRegisteredBiller(RegisteredBillers registeredBillers) {
+		
+		try {
+			RegisteredBillers save = registeredBillerRepo.save(registeredBillers);
+			return new ResponseEntity<RegisteredBillers>(save, HttpStatus.OK);
 
-		RegisteredBillers save = registeredBillerRepo.save(registeredBillers);
+		} catch (Exception e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.EXPECTATION_FAILED);
 
-		if (save != null)
-			return "success";
-		else
-			return "failure";
+		}
 
 	}
 	

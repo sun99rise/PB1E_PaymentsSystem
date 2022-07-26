@@ -6,12 +6,14 @@ import javax.persistence.Id;
 import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Component
+@Data
 public class AccountHolder {
 	
 	@Id

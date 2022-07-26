@@ -9,6 +9,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import com.sun.istack.NotNull;
 
@@ -32,11 +33,12 @@ public class Bill {
 	private String status;
 	private int accountNumber;
 	
-	
+	@Transient
 	@ManyToOne
 	@JoinColumn(name = "billerCode", referencedColumnName = "biller_code", insertable = false, updatable = false)
 	private MasterBillerList biller_code1;
 	
+	@Transient
 	@ManyToOne
 	@JoinColumn(name = "accountNumber", referencedColumnName = "accountNumber", insertable = false, updatable = false)
 	private AccountHolder account_number1;
