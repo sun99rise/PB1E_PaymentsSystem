@@ -1,4 +1,4 @@
-package com.barclays.paymentssystem.service;
+package com.barclays.paymentsSystem.service;
 
 import java.util.List;
 
@@ -9,10 +9,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.barclays.paymentssystem.entity.RegisteredBillers;
-import com.barclays.paymentssystem.repository.RegisterBillerRepo;
+import com.barclays.paymentsSystem.entity.RegisteredBillers;
+import com.barclays.paymentsSystem.repository.RegisterBillerRepo;
 
 import lombok.extern.slf4j.Slf4j;
+
+/**
+ * 
+ * @author Aruna
+ *
+ */
 
 @Slf4j
 @Service

@@ -1,13 +1,19 @@
-package com.barclays.paymentssystem.service;
+package com.barclays.paymentsSystem.service;
 
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.barclays.paymentssystem.entity.Bill;
-import com.barclays.paymentssystem.entity.RegisteredBillers;
+import com.barclays.paymentsSystem.entity.Bill;
+import com.barclays.paymentsSystem.entity.RegisteredBillers;
 
+
+/**
+ * 
+ * @author Aruna
+ *
+ */
 
 @Service
 public interface RegisteredBiller {

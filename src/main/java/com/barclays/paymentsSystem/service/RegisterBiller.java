@@ -1,12 +1,16 @@
-package com.barclays.paymentssystem.service;
+package com.barclays.paymentsSystem.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.barclays.paymentssystem.entity.RegisteredBillers;
+import com.barclays.paymentsSystem.entity.RegisteredBillers;
 
-
+/**
+ * 
+ * @author Aruna
+ *
+ */
 @Service
 public interface RegisterBiller {
 
