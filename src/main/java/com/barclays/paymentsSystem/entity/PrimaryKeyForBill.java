@@ -14,6 +14,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Embeddable
+
+/**
+ * 
+ * @author Himal
+ * 
+ * primary key for bill entity
+ * 
+ */
+
 public class PrimaryKeyForBill implements Serializable {
 	
 	@NotNull
