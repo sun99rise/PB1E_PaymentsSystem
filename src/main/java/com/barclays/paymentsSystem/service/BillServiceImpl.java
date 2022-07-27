@@ -384,6 +384,12 @@ public class BillServiceImpl implements BillService {
 		}
 
 	}
+	
+	/**
+	 * updateBill(UpdateBillDTO updateBillDTO): method to update the bills 
+	 * inputs: change we want to commit
+	 * output: updated status of the bills 
+	 */
 
 	@Override
 	public ResponseEntity<?> updateBill(UpdateBillDTO updateBillDTO) {
