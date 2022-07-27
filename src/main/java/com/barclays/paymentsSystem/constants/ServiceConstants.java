@@ -3,12 +3,7 @@ package com.barclays.paymentssystem.constants;
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
-/**
- *
- * @author Shashank
- * Global Service ServiceConstants
- *
- */
+
 @Data
 @Component
 public class ServiceConstants {
