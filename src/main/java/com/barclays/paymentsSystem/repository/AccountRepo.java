@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import com.barclays.paymentssystem.entity.AccountHolder;
 
+//Connecting to Database using JpaRepository class
+
 @Repository
 public interface AccountRepo extends JpaRepository<AccountHolder, Integer> {
 
