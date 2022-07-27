@@ -36,8 +36,9 @@ import lombok.extern.slf4j.Slf4j;
  * 
  * @author suraj
  *
- *  this class will implementation all methods of billService interface.
- *  implementation includes the some crud operation and some user defined operations
+ *         this class will implementation all methods of billService interface.
+ *         implementation includes the some crud operation and some user defined
+ *         operations
  */
 
 @Slf4j
@@ -52,20 +53,19 @@ public class BillServiceImpl implements BillService {
 
 	@Autowired
 	RegisterBillerRepo registerBillerRepo;
-	
-	
 
 	/**
 	 * createBill(Bill bill) : method to insert the new Bill to database table
-	 * inputs: Bill entity - which we want to insert
-	 * output: ResponseEntity<?> - will return Bill when there is happy flow, will return String if there is any exception occurred 
+	 * inputs: Bill entity - which we want to insert output: ResponseEntity<?> -
+	 * will return Bill when there is happy flow, will return String if there is any
+	 * exception occurred
 	 */
 	@Override
 	public ResponseEntity<?> createBill(Bill bill) {
 
 		try {
 
-			log.info("cteating the new entr in bill table");
+			log.info("creating the new entry in bill table");
 			Bill save = billRepo.save(bill);
 			log.info("bill created successfully");
 
@@ -74,18 +74,19 @@ public class BillServiceImpl implements BillService {
 
 		} catch (Exception e) {
 			log.debug("in catch block: exception occured");
-			return new ResponseEntity<String>(ServiceConstants.CREATE_BILL_EXCEPTION_MESSAGE, HttpStatus.EXPECTATION_FAILED);
+			return new ResponseEntity<String>(ServiceConstants.CREATE_BILL_EXCEPTION_MESSAGE,
+					HttpStatus.EXPECTATION_FAILED);
 
 		}
 
 	}
 
 	/**
-	 * getBills(): method to retrieve all bills
-	 * inputs: 
-	 * output: ResponseEntity<?> - will return List<Bill> when there is happy flow, will return String if there is any exception occurred 
+	 * getBills(): method to retrieve all bills inputs: output: ResponseEntity<?> -
+	 * will return List<Bill> when there is happy flow, will return String if there
+	 * is any exception occurred
 	 */
-	
+
 	@Override
 	public ResponseEntity<?> getBills() {
 
@@ -99,15 +100,17 @@ public class BillServiceImpl implements BillService {
 			return new ResponseEntity<List<Bill>>(allBills, HttpStatus.OK);
 
 		} catch (Exception e) {
-			return new ResponseEntity<String>(ServiceConstants.RETRIVAL_EXCEPTION_MESSAGE, HttpStatus.EXPECTATION_FAILED);
+			return new ResponseEntity<String>(ServiceConstants.RETRIVAL_EXCEPTION_MESSAGE,
+					HttpStatus.EXPECTATION_FAILED);
 		}
 
 	}
-	
+
 	/**
-	 * getBills(): method to retrieve bills by status and accountNumber
-	 * inputs: accountNumber and status
-	 * output: ResponseEntity<?> - will return List<Bill> when there is happy flow, will return String if there is any exception occurred 
+	 * getBills(): method to retrieve bills by status and accountNumber inputs:
+	 * accountNumber and status output: ResponseEntity<?> - will return List<Bill>
+	 * when there is happy flow, will return String if there is any exception
+	 * occurred
 	 */
 
 	@Override
@@ -128,11 +131,12 @@ public class BillServiceImpl implements BillService {
 		}
 
 	}
-	
+
 	/**
-	 * getBills(): method to retrieve paid bills
-	 * inputs: GetPaidBillsDTO(billerCode, "paid", accountNumber)
-	 * output: ResponseEntity<?> - will return List<Bill> when there is happy flow, will return String if there is any exception occurred 
+	 * getBills(): method to retrieve paid bills inputs: GetPaidBillsDTO(billerCode,
+	 * "paid", accountNumber) output: ResponseEntity<?> - will return List<Bill>
+	 * when there is happy flow, will return String if there is any exception
+	 * occurred
 	 */
 
 	@Override
@@ -153,11 +157,11 @@ public class BillServiceImpl implements BillService {
 	}
 
 	/**
-	 * payBill(PayBillDTO payBillDTO): method to pay bill manually
-	 * inputs: GetPaidBillsDTO(billerCode, "paid", accountNumber)
-	 * output: ResponseEntity<?> - will return specific message depending on the status of transaction 
+	 * payBill(PayBillDTO payBillDTO): method to pay bill manually inputs:
+	 * GetPaidBillsDTO(billerCode, "paid", accountNumber) output: ResponseEntity<?>
+	 * - will return specific message depending on the status of transaction
 	 */
-	
+
 	@Override
 	public ResponseEntity<?> manualBillPay(PayBillDTO payBillDTO) {
 
@@ -203,7 +207,8 @@ public class BillServiceImpl implements BillService {
 						if (updatedBill != null && updatedAccount != null) {
 							return new ResponseEntity<String>(ServiceConstants.BILL_PAID_MESSAGE, HttpStatus.OK);
 						} else {
-							return new ResponseEntity<String>(ServiceConstants.BILL_PAY_EXCEPTION_MESSAGE, HttpStatus.OK);
+							return new ResponseEntity<String>(ServiceConstants.BILL_PAY_EXCEPTION_MESSAGE,
+									HttpStatus.OK);
 						}
 
 					} else {
@@ -219,17 +224,19 @@ public class BillServiceImpl implements BillService {
 			}
 
 		} catch (Exception e) {
-			return new ResponseEntity<String>(ServiceConstants.GENERAL_EXCEPTION_MESSAGE, HttpStatus.EXPECTATION_FAILED);
+			return new ResponseEntity<String>(ServiceConstants.GENERAL_EXCEPTION_MESSAGE,
+					HttpStatus.EXPECTATION_FAILED);
 		}
 
 	}
 
 	/**
-	 * autoBillPayment(): method to pay bill automatically
-	 * inputs: 
-	 * output: ResponseEntity<?> - will return the Map<String, String> specifying billId and bill pay status in happy flow, will display the exception message depending on the status of transaction 
+	 * autoBillPayment(): method to pay bill automatically inputs: output:
+	 * ResponseEntity<?> - will return the Map<String, String> specifying billId and
+	 * bill pay status in happy flow, will display the exception message depending
+	 * on the status of transaction
 	 */
-	
+
 	@Override
 	public ResponseEntity<?> autoBillPayment() {
 
@@ -252,7 +259,7 @@ public class BillServiceImpl implements BillService {
 					long dateDiff = getDateDiff(bill.getDueDate().toString());
 
 					log.info("checking if bill due date is less than or equal to 3 days");
-					if (dateDiff!=-1 && dateDiff <= 3) {
+					if (dateDiff != -1 && dateDiff <= 3) {
 
 						billsAvailableforAutoPay.add(bill);
 					}
@@ -273,11 +280,11 @@ public class BillServiceImpl implements BillService {
 
 					} else {
 						log.debug("auto pay is false or pay limit is less than the ill amount");
-						//return new ResponseEntity<String>(ServiceConstants.BILL_INELIGIBLE_MESSAGE, HttpStatus.OK);
+						
 					}
 
 				}
-				if( autoPayStatus.size()>1 )
+				if (autoPayStatus.size() > 1)
 					return new ResponseEntity<Map<String, String>>(autoPayStatus, HttpStatus.OK);
 				else
 					return new ResponseEntity<String>(ServiceConstants.BILL_INELIGIBLE_MESSAGE, HttpStatus.OK);
@@ -293,11 +300,11 @@ public class BillServiceImpl implements BillService {
 	}
 
 	/**
-	 * getDateDiff(String date): method to get difference between due date and current date for auto bill payment
-	 * inputs: date in String form
-	 * output: long int defining the difference in happy flow, -1 if there is any exception 
+	 * getDateDiff(String date): method to get difference between due date and
+	 * current date for auto bill payment inputs: date in String form output: long
+	 * int defining the difference in happy flow, -1 if there is any exception
 	 */
-	
+
 	public long getDateDiff(String date) {
 
 		LocalDate today = LocalDate.now();
@@ -332,7 +339,11 @@ public class BillServiceImpl implements BillService {
 	}
 
 	
-	
+	/**
+	 * 
+	 * @param bill
+	 * @return ResposeEntity<String> - will return the specific according to the method logic 
+	 */
 	public ResponseEntity<?> pay(Bill bill) {
 
 		try {
@@ -378,54 +389,61 @@ public class BillServiceImpl implements BillService {
 			}
 
 		} catch (Exception e) {
-			// TODO: handle exception
-			return new ResponseEntity<String>(ServiceConstants.GENERAL_EXCEPTION_MESSAGE, HttpStatus.EXPECTATION_FAILED);
+			
+			return new ResponseEntity<String>(ServiceConstants.GENERAL_EXCEPTION_MESSAGE,
+					HttpStatus.EXPECTATION_FAILED);
 
 		}
 
 	}
 
+	/**
+	 *  updateBill(UpdateBillDTO updateBillDTO)  :method to update the bill.
+	 *  can be able to modify the amount and due date for the particular bill.
+	 */
+	
 	@Override
 	public ResponseEntity<?> updateBill(UpdateBillDTO updateBillDTO) {
+
 		
 		try {
-			
-			Optional<Bill> bill = billRepo.findByPrimarKey(new PrimaryKeyForBill(updateBillDTO.getBillerCode(), updateBillDTO.getConsumerNumber()));
-			
-			if( bill.isPresent() && bill.get().getStatus().equals(ServiceConstants.PENDING_STATUS) ) {
-				
-				if( updateBillDTO.getAmount() > 0 ) {
+
+			Optional<Bill> bill = billRepo.findByPrimarKey(
+					new PrimaryKeyForBill(updateBillDTO.getBillerCode(), updateBillDTO.getConsumerNumber()));
+
+			if (bill.isPresent() && bill.get().getStatus().equals(ServiceConstants.PENDING_STATUS)) {
+
+				if (updateBillDTO.getAmount() > 0) {
 					bill.get().setAmount(updateBillDTO.getAmount());
 				}
-				
-				if( updateBillDTO.getDueDate() != null && updateBillDTO.getDueDate().toString().trim().length() > 0 ) {
+
+				if (updateBillDTO.getDueDate() != null && updateBillDTO.getDueDate().toString().trim().length() > 0) {
 					bill.get().setDueDate(updateBillDTO.getDueDate());
 				}
-				
+
 				Bill updatedBill = billRepo.save(bill.get());
-				
-				if( updatedBill != null ) {
-					return new ResponseEntity<Bill>(updatedBill,HttpStatus.OK);
-				}else {
-					return new ResponseEntity<String>("Problem Occurred while updating bill",HttpStatus.OK);
+
+				if (updatedBill != null) {
+					return new ResponseEntity<Bill>(updatedBill, HttpStatus.OK);
+				} else {
+					return new ResponseEntity<String>("Problem Occurred while updating bill", HttpStatus.OK);
 				}
-				
-				
-			}else {
-				
-				if(bill.isPresent() && !bill.get().getStatus().equals(ServiceConstants.PENDING_STATUS))
-					return new ResponseEntity<String>("No pending bill found with given billerCode and Consumer Number ( Only Pending Billl can be updated )",HttpStatus.OK);
+
+			} else {
+
+				if (bill.isPresent() && !bill.get().getStatus().equals(ServiceConstants.PENDING_STATUS))
+					return new ResponseEntity<String>(
+							ServiceConstants.NO_PENDING_BILLERANDCONSUMER_MESSAGE,
+							HttpStatus.OK);
 				else
-					return new ResponseEntity<String>("No bill found with given billerCode and Consumer Number",HttpStatus.OK);
+					return new ResponseEntity<String>(ServiceConstants.NO_BILL_WITH_BILLERANDCONSUMER_MESSAGE,
+							HttpStatus.OK);
 			}
-				
-			
-			
+
 		} catch (Exception e) {
-			// TODO: handle exception
+			return new ResponseEntity<String>(ServiceConstants.GENERAL_EXCEPTION_MESSAGE, HttpStatus.EXPECTATION_FAILED);
 		}
-		
-		return null;
+
 	}
 
 }

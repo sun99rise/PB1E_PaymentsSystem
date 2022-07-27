@@ -9,7 +9,7 @@ import com.barclays.paymentssystem.entity.RegisteredBillers;
 
 
 @Service
-public interface RegisteredBiller {
+public interface RegisterBiller {
 
 	public ResponseEntity<?> createRegisteredBiller(RegisteredBillers registeredBillers );
 	

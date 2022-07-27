@@ -16,7 +16,7 @@ import com.barclays.paymentssystem.entity.Bill;
 import com.barclays.paymentssystem.service.BillService;
 
 /**
- * controller for bill related endpoints
+ * Controller for bill related endpoints
  * @author hp
  *
  */

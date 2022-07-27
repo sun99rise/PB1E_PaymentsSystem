@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.barclays.paymentssystem.constants.ServiceConstants;
 import com.barclays.paymentssystem.entity.RegisteredBillers;
 import com.barclays.paymentssystem.repository.RegisterBillerRepo;
 
@@ -17,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 @Transactional
-public class RegisterBillerImpl implements RegisteredBiller {
+public class RegisterBillerImpl implements RegisterBiller {
 
 	@Autowired
 	RegisterBillerRepo registeredBillerRepo;
@@ -30,7 +31,7 @@ public class RegisterBillerImpl implements RegisteredBiller {
 			return new ResponseEntity<RegisteredBillers>(save, HttpStatus.OK);
 
 		} catch (Exception e) {
-			return new ResponseEntity<String>(e.getMessage(), HttpStatus.EXPECTATION_FAILED);
+			return new ResponseEntity<String>(ServiceConstants.GENERAL_EXCEPTION_MESSAGE, HttpStatus.EXPECTATION_FAILED);
 
 		}
 
