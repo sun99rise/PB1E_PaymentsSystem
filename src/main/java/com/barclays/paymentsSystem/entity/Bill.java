@@ -21,6 +21,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+
+/**
+ * 
+ * @author Himal
+ * 
+ * create Bill entity
+ * 
+ */
+
 public class Bill {
 	
 	private String bil_sequence_id = UUID.randomUUID().toString().substring(0, 8);;
