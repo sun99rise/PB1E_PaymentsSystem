@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+//Defining the Data transfer object variables for UpdateBill
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
