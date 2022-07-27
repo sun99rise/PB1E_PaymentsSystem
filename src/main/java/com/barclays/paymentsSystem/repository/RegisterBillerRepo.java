@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.barclays.paymentssystem.entity.RegisteredBillers;
-
+// Connecting to route database using jpa repository class
 @Repository
 public interface RegisterBillerRepo extends JpaRepository<RegisteredBillers, String> {
 
