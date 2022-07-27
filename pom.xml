@@ -9,7 +9,7 @@
 		<version>2.7.2</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.barclays.paymentsystem</groupId>
+	<groupId>com.barclays.paymentssystem</groupId>
 	<artifactId>PB1E_PaymentsSystem</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>PB1E_PaymentsSystem</name>
@@ -49,12 +49,8 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger-ui</artifactId>
-			<version>3.0.0</version>
-		</dependency>
+		
+		
 
 	</dependencies>
 

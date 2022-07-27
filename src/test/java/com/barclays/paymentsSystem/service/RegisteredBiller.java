@@ -15,25 +15,25 @@ import com.barclays.paymentssystem.repository.RegisterBillerRepo;
 
 public class RegisteredBiller {
 
-	@MockBean
-	RegisterBillerRepo registerBillerRepo;
-	
-	@Autowired
-	RegisteredBiller registeredBiller;
-	
-	RegisteredBillers registeredBillers;
-	
-	@BeforeEach
-	public void initialization() {
-		
-		//List<RegisteredBillers> billers = Stream.of(new RegisteredBillers(null, null, 0, false, 0, null, null))
-		
-	}
-	
-	@Test
-	public void createRegisteredBillerTest() {
-		
-		//when(registerBillerRepo.save(null))
-		
-	}
+//	@MockBean
+//	RegisterBillerRepo registerBillerRepo;
+//	
+//	@Autowired
+//	RegisteredBiller registeredBiller;
+//	
+//	RegisteredBillers registeredBillers;
+//	
+//	@BeforeEach
+//	public void initialization() {
+//		
+//		//List<RegisteredBillers> billers = Stream.of(new RegisteredBillers(null, null, 0, false, 0, null, null))
+//		
+//	}
+//	
+//	@Test
+//	public void createRegisteredBillerTest() {
+//		
+//		//when(registerBillerRepo.save(null))
+//		
+//	}
 }

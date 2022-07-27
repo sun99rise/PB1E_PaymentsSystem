@@ -11,8 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.barclays.paymentssystem.dto.AccountAndStatusDTO;
 import com.barclays.paymentssystem.dto.GetPaidBillsDTO;
 import com.barclays.paymentssystem.dto.PayBillDTO;
+import com.barclays.paymentssystem.dto.UpdateBillDTO;
 import com.barclays.paymentssystem.entity.Bill;
 import com.barclays.paymentssystem.service.BillService;
+
+/**
+ * controller for bill related endpoints
+ * @author hp
+ *
+ */
 
 @RestController
 @RequestMapping("/api")
@@ -52,7 +59,21 @@ public class BillController {
 	@PostMapping("/payBill")
 	public ResponseEntity<?> payBill(@RequestBody PayBillDTO payBillDTO) {
 
-		return billService.payBill(payBillDTO);
+		return billService.manualBillPay(payBillDTO);
+
+	}
+	
+	@GetMapping("/autoPayBill")
+	public ResponseEntity<?> payBill() {
+
+		return billService.autoBillPayment();
+
+	}
+	
+	@PostMapping("/updateBill")
+	public ResponseEntity<?> updateBill(@RequestBody UpdateBillDTO updateBillDTO) {
+
+		return billService.updateBill(updateBillDTO);
 
 	}
 
