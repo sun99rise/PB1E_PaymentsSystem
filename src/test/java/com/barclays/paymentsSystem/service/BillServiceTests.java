@@ -1,7 +1,9 @@
 package com.barclays.paymentsSystem.service;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 import java.sql.Date;
@@ -15,6 +17,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import com.barclays.paymentssystem.entity.Bill;
 import com.barclays.paymentssystem.entity.PrimaryKeyForBill;
@@ -22,8 +26,8 @@ import com.barclays.paymentssystem.repository.BillRepo;
 import com.barclays.paymentssystem.service.BillService;
 
 @SpringBootTest
-public class BillServiceTest {
-
+public class BillServiceTests {
+	
 	@Autowired
 	BillService billService;
 	@MockBean
@@ -67,6 +71,7 @@ public class BillServiceTest {
 		bill.setAccountNumber(12345678);
 		bill.setAmount(120);
 		bill.setBil_sequence_id("fjdhfy45");
+		//setDueDate(Date)
 		bill.setDueDate(new Date(2022, 02, 18));
 		bill.setStatus("pending");
 		bill.setPrimarKey(new PrimaryKeyForBill("b1", "8476475898"));
@@ -76,7 +81,7 @@ public class BillServiceTest {
 	@Test
 	public void createBillTest1() {
 
-		// ResponseEntity response = new ResponseEntity<Bill>(bill, HttpStatus.OK);
+ ResponseEntity response = new ResponseEntity<Bill>(bill, HttpStatus.OK);
 
 		when(billRepo.save(bill)).thenReturn(null);
 		assertNotEquals(bill, billService.createBill(bill).getBody());
@@ -101,13 +106,18 @@ public class BillServiceTest {
 
 	@Test
 	public void paidBillsTest() {
-
 		
-		
-		when(billRepo.findByAccountNumberAndStatus(345543434, "paid")).thenReturn(paidBillList);
-		
+	when(billRepo.findByAccountNumberAndStatus(345543434, "paid")).thenReturn(paidBillList);
+	
 		assertEquals( paidBillList, billService.getBillByUserAndStatus(345543434, "paid").getBody());
 
+	}
+	
+	@Test
+	public void paBill() {
+		
+		
+		
 	}
 
 }

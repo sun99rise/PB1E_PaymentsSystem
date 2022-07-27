@@ -65,7 +65,7 @@ public class RegisteredBillers {
 class PrimarKey implements Serializable {
 	
 	@NotNull
-	String biller_code;
+	String billerCode;
 	//@NotNull
 	
 	String consumerNumber;
@@ -78,10 +78,10 @@ class PrimarKey implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		PrimarKey other = (PrimarKey) obj;
-		if (biller_code == null) {
-			if (other.biller_code != null)
+		if (billerCode == null) {
+			if (other.billerCode != null)
 				return false;
-		} else if (!biller_code.equals(other.biller_code))
+		} else if (!billerCode.equals(other.billerCode))
 			return false;
 		if (consumerNumber == null) {
 			if (other.consumerNumber != null)
@@ -94,7 +94,7 @@ class PrimarKey implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((biller_code == null) ? 0 : biller_code.hashCode());
+		result = prime * result + ((billerCode == null) ? 0 : billerCode.hashCode());
 		result = prime * result + ((consumerNumber == null) ? 0 : consumerNumber.hashCode());
 		return result;
 	}

@@ -10,14 +10,17 @@ import com.barclays.paymentssystem.entity.*;
 
 @Repository
 public interface BillRepo extends JpaRepository<Bill, Integer> {
-	
-	public final String PAY_BILL_STATUS = "pending";
-	
-	public List<Bill> findByAccountNumberAndStatus(int accountNumber, String status);
-	public List<Bill> findByPrimarKeyBillerCodeAndStatusAndAccountNumber(String billerCode, String status, int accountNumber);
-	
-	public Optional<Bill> findByPrimarKeyBillerCodeAndPrimarKeyConsumerNumberAndAccountNumberAndStatus(String billerCode, String consumerNumber, int accountNumber, String status );
 
-	public Optional<Bill> findByStatus(String status);
+	public List<Bill> findByAccountNumberAndStatus(int accountNumber, String status);
+
+	public List<Bill> findByPrimarKeyBillerCodeAndStatusAndAccountNumber(String billerCode, String status,
+			int accountNumber);
+
+	public Optional<Bill> findByPrimarKeyBillerCodeAndPrimarKeyConsumerNumberAndAccountNumberAndStatus(
+			String billerCode, String consumerNumber, int accountNumber, String status);
+
+	public List<Bill> findByStatus(String status);
 	
+	public Optional<Bill> findByPrimarKey(PrimaryKeyForBill billKey);
+
 }
