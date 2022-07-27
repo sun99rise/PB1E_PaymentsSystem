@@ -30,7 +30,7 @@ public class ServiceConstants {
 	public static final String NO_BILL_WITH_BILLERANDCONSUMER_MESSAGE = "No bill found with given billerCode and Consumer Number";
 
 	//registerBill Service
-	public static final String RIGISTER_SUCCESS_MESSAGE = 
+	//public static final String RIGISTER_SUCCESS_MESSAGE = 
 	
 	
 }
