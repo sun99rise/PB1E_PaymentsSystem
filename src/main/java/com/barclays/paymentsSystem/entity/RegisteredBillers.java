@@ -30,6 +30,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Data
+
+/**
+ * 
+ * @author Himal
+ * 
+ * registered billers entity
+ * 
+ */
+
 public class RegisteredBillers {
 	
 	@EmbeddedId
