@@ -9,6 +9,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 
+ * @author mir
+ * 
+ * create account holder entity
+ *
+ */
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor

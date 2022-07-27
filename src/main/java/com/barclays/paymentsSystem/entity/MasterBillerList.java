@@ -7,6 +7,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 
+ * @author mir
+ * 
+ * create master biller list entity
+ *
+ */
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
