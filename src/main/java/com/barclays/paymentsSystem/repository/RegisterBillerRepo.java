@@ -15,7 +15,9 @@ public interface RegisterBillerRepo extends JpaRepository<RegisteredBillers, Str
 	// @Modifying
 	// @Query("delete from registeredBiller where bill_sequence_id = ?1")
 	int deleteBySequenceid(String id);
-
+	
+// Retrieving registerbiller as true and paylimit greater than bill amount for given biller code and consumer number
+	
 	public RegisteredBillers findByAccountNumberAndPrimarKeyBillerCodeAndPrimarKeyConsumerNumberAndAutoPayTrueAndAutoPayLimitGreaterThan(int accountNumber,
 			String billerCode, String consumerNumber,double billAmount);
 }
