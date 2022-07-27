@@ -9,8 +9,10 @@ import com.barclays.paymentsSystem.entity.RegisteredBillers;
 /**
  * 
  * @author Aruna
- *
+ * 
+ * Register service interface to declare the required business methods 
  */
+
 @Service
 public interface RegisterBiller {
 

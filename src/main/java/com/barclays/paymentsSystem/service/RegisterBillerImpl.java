@@ -14,6 +14,15 @@ import com.barclays.paymentssystem.repository.RegisterBillerRepo;
 
 import lombok.extern.slf4j.Slf4j;
 
+
+/**
+ * 
+ * @author Aruna
+ *
+ *this class will implementation all methods of registerService interface.
+ * implementation includes the some crud operation and some user defined operations
+ */
+
 @Slf4j
 @Service
 @Transactional
@@ -21,6 +30,12 @@ public class RegisterBillerImpl implements RegisteredBiller {
 
 	@Autowired
 	RegisterBillerRepo registeredBillerRepo;
+	
+	/**
+	 * createRegisteredBiller(RegisteredBillers registeredBillers) : method to insert the Register Biller to database table
+	 * inputs: registered Biller entity - which we want to insert
+	 * output: ResponseEntity<?> - will return Bill when there is happy flow, will return String if there is any exception occurred 
+	 */
 
 	@Override
 	public ResponseEntity<?> createRegisteredBiller(RegisteredBillers registeredBillers) {
@@ -36,6 +51,12 @@ public class RegisterBillerImpl implements RegisteredBiller {
 
 	}
 	
+	/**
+	 * getRegisteredBiller(): method to retrieve all registered bills
+	 * inputs: 
+	 * output: ResponseEntity<?> - will return List<Bill> when there is happy flow, will return String if there is any exception occurred 
+	 */
+	
 	@Override
 	public List<RegisteredBillers> getRegisteredBiller(){
 		
@@ -48,6 +69,12 @@ public class RegisterBillerImpl implements RegisteredBiller {
 		}
 		
 	}
+	
+	/**
+	 * removeRegisteredBiller(String id): method to delete the registered bills
+	 * inputs: Sequence_id
+	 * output: ResponseEntity<?> - will return List<Bill> when there is happy flow, will return String if there is any exception occurred 
+	 */
 
 	@Override
 	public String removeRegisteredBiller(String id) {

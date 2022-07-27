@@ -7,6 +7,13 @@ import org.springframework.stereotype.Service;
 
 import com.barclays.paymentssystem.entity.RegisteredBillers;
 
+/**
+ * 
+ * @author Aruna
+ *
+ *RegisteredBiller service interface to declare the required business methods 
+ */
+
 
 @Service
 public interface RegisteredBiller {
