@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.barclays.paymentssystem.entity.RegisteredBillers;
+import com.barclays.paymentssystem.service.BillerService;
 import com.barclays.paymentssystem.service.RegisterBiller;
 
 import lombok.extern.slf4j.Slf4j;
@@ -31,12 +32,12 @@ import lombok.extern.slf4j.Slf4j;
 public class RegisterBillerController {
 
 	@Autowired
-	RegisterBiller registerBiller;
+	BillerService registerBiller;
 
 	@PostMapping("/register")
 	public ResponseEntity<?> addBiller(@RequestBody RegisteredBillers registeredBillers) {
 
-		return registerBiller.createRegisteredBiller (registeredBillers);
+		return registerBiller.createRegisteredBiller(registeredBillers);
 
 	}
 

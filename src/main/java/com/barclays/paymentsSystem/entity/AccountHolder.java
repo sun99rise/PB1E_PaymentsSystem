@@ -12,16 +12,15 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Component
 @Data
 public class AccountHolder {
 	
 	@Id
-	int accountNumber;
-    String email;
-	String name;
-	String address;
-	double currentBalance;
+	private int accountNumber;
+	private String email;
+	private String name;
+	private String address;
+	private double currentBalance;
 	
 
 }

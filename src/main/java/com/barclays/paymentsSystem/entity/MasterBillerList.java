@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class MasterBillerList {
 
 	@Id
-	String biller_code;
-	String name;
+	private String billerCode;
+	private String name;
 	
 }

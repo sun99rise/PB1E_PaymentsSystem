@@ -25,12 +25,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Component
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 @Data
+@Entity
 public class RegisteredBillers {
+	
 	
 	@EmbeddedId
 	private PrimarKey primarKey;
@@ -44,15 +44,12 @@ public class RegisteredBillers {
 	@NotNull
 	double autoPayLimit;
 	
-	@Transient
-	@ManyToOne
-	@JoinColumn(name = "biller_code", referencedColumnName = "biller_code", insertable = false, updatable = false)
-	private MasterBillerList masterBiller;
+	
 	
 	@Transient
 	@ManyToOne
-	@JoinColumn(name = "accountNumber", referencedColumnName = "accountNumber", insertable = false, updatable = false)
-	private AccountHolder accHolder;
+	@JoinColumn(name = "account_number", referencedColumnName = "account_number", insertable = false, updatable = false)
+	private AccountHolder accHolder11;
 	
 	
 
@@ -66,9 +63,10 @@ class PrimarKey implements Serializable {
 	
 	@NotNull
 	String billerCode;
-	//@NotNull
-	
+
+	@NotNull
 	String consumerNumber;
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

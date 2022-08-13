@@ -3,7 +3,11 @@ package com.barclays.paymentssystem.entity;
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.istack.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -20,6 +24,15 @@ public class PrimaryKeyForBill implements Serializable {
 	String billerCode;
 	@NotNull
 	String consumerNumber;
+	
+	
+	
+	@Transient
+	//@JsonBackReference
+	 @ManyToOne
+	 @JoinColumn(name = "billerCode")
+	 private MasterBillerList biller;
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -48,6 +61,11 @@ public class PrimaryKeyForBill implements Serializable {
 		result = prime * result + ((billerCode == null) ? 0 : billerCode.hashCode());
 		result = prime * result + ((consumerNumber == null) ? 0 : consumerNumber.hashCode());
 		return result;
+	}
+	public PrimaryKeyForBill(String billerCode, String consumerNumber) {
+		super();
+		this.billerCode = billerCode;
+		this.consumerNumber = consumerNumber;
 	}
 
 }

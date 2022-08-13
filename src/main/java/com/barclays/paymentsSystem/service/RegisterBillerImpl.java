@@ -16,9 +16,9 @@ import com.barclays.paymentssystem.repository.RegisterBillerRepo;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Service
 @Transactional
-public class RegisterBillerImpl implements RegisterBiller {
+@Service
+public class RegisterBillerImpl implements BillerService {
 
 	@Autowired
 	RegisterBillerRepo registeredBillerRepo;
@@ -27,11 +27,13 @@ public class RegisterBillerImpl implements RegisterBiller {
 	public ResponseEntity<?> createRegisteredBiller(RegisteredBillers registeredBillers) {
 		
 		try {
+			log.info("start - saving the biller to list");
 			RegisteredBillers save = registeredBillerRepo.save(registeredBillers);
+			log.info("end - biller saved: ");
 			return new ResponseEntity<RegisteredBillers>(save, HttpStatus.OK);
 
 		} catch (Exception e) {
-			return new ResponseEntity<String>(ServiceConstants.GENERAL_EXCEPTION_MESSAGE, HttpStatus.EXPECTATION_FAILED);
+			return new ResponseEntity<String>(ServiceConstants.GENERAL_EXCEPTION_MESSAGE, HttpStatus.BAD_GATEWAY);
 
 		}
 

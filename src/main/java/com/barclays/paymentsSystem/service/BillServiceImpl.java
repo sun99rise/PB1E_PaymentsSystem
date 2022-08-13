@@ -75,7 +75,7 @@ public class BillServiceImpl implements BillService {
 		} catch (Exception e) {
 			log.debug("in catch block: exception occured");
 			return new ResponseEntity<String>(ServiceConstants.CREATE_BILL_EXCEPTION_MESSAGE,
-					HttpStatus.EXPECTATION_FAILED);
+					HttpStatus.BAD_GATEWAY);
 
 		}
 
@@ -101,7 +101,7 @@ public class BillServiceImpl implements BillService {
 
 		} catch (Exception e) {
 			return new ResponseEntity<String>(ServiceConstants.RETRIVAL_EXCEPTION_MESSAGE,
-					HttpStatus.EXPECTATION_FAILED);
+					HttpStatus.BAD_GATEWAY);
 		}
 
 	}
@@ -126,7 +126,7 @@ public class BillServiceImpl implements BillService {
 			return new ResponseEntity<List<Bill>>(billList, HttpStatus.OK);
 
 		} catch (Exception e) {
-			return new ResponseEntity<String>(ServiceConstants.RETRIVAL_EXCEPTION_MESSAGE, HttpStatus.OK);
+			return new ResponseEntity<String>(ServiceConstants.RETRIVAL_EXCEPTION_MESSAGE, HttpStatus.BAD_GATEWAY);
 
 		}
 
@@ -150,7 +150,7 @@ public class BillServiceImpl implements BillService {
 			return new ResponseEntity<List<Bill>>(billList, HttpStatus.OK);
 
 		} catch (Exception e) {
-			return new ResponseEntity<String>(ServiceConstants.PAID_BILLS_EXCEPTION_MESSAGE, HttpStatus.OK);
+			return new ResponseEntity<String>(ServiceConstants.PAID_BILLS_EXCEPTION_MESSAGE, HttpStatus.BAD_GATEWAY);
 
 		}
 
@@ -208,24 +208,24 @@ public class BillServiceImpl implements BillService {
 							return new ResponseEntity<String>(ServiceConstants.BILL_PAID_MESSAGE, HttpStatus.OK);
 						} else {
 							return new ResponseEntity<String>(ServiceConstants.BILL_PAY_EXCEPTION_MESSAGE,
-									HttpStatus.OK);
+									HttpStatus.BAD_GATEWAY);
 						}
 
 					} else {
-						return new ResponseEntity<String>(ServiceConstants.LOW_BALANCE_MESSAGE, HttpStatus.OK);
+						return new ResponseEntity<String>(ServiceConstants.LOW_BALANCE_MESSAGE, HttpStatus.BAD_REQUEST);
 					}
 				} else {
-					return new ResponseEntity<String>(ServiceConstants.NO_USER_MESSAGE, HttpStatus.OK);
+					return new ResponseEntity<String>(ServiceConstants.NO_USER_MESSAGE, HttpStatus.BAD_REQUEST);
 				}
 
 			} else {
 				log.info("No pending bill with given details");
-				return new ResponseEntity<String>(ServiceConstants.NO_PENDING_BILL_MESSAGE, HttpStatus.OK);
+				return new ResponseEntity<String>(ServiceConstants.NO_PENDING_BILL_MESSAGE, HttpStatus.BAD_REQUEST);
 			}
 
 		} catch (Exception e) {
 			return new ResponseEntity<String>(ServiceConstants.GENERAL_EXCEPTION_MESSAGE,
-					HttpStatus.EXPECTATION_FAILED);
+					HttpStatus.BAD_GATEWAY);
 		}
 
 	}
@@ -280,21 +280,21 @@ public class BillServiceImpl implements BillService {
 
 					} else {
 						log.debug("auto pay is false or pay limit is less than the ill amount");
-						
+
 					}
 
 				}
 				if (autoPayStatus.size() > 1)
 					return new ResponseEntity<Map<String, String>>(autoPayStatus, HttpStatus.OK);
 				else
-					return new ResponseEntity<String>(ServiceConstants.BILL_INELIGIBLE_MESSAGE, HttpStatus.OK);
+					return new ResponseEntity<String>(ServiceConstants.BILL_INELIGIBLE_MESSAGE, HttpStatus.BAD_REQUEST);
 			} else {
-				return new ResponseEntity<String>(ServiceConstants.NO_PENDING_BILL_MESSAGE, HttpStatus.OK);
+				return new ResponseEntity<String>(ServiceConstants.NO_PENDING_BILL_MESSAGE, HttpStatus.BAD_REQUEST);
 			}
 
 		} catch (Exception e) {
 			// TODO: handle exception
-			return new ResponseEntity<String>(ServiceConstants.GENERAL_EXCEPTION_MESSAGE, HttpStatus.OK);
+			return new ResponseEntity<String>(ServiceConstants.GENERAL_EXCEPTION_MESSAGE, HttpStatus.BAD_GATEWAY);
 		}
 
 	}
@@ -338,15 +338,15 @@ public class BillServiceImpl implements BillService {
 		return dateDifference;
 	}
 
-	
 	/**
 	 * 
 	 * @param bill
-	 * @return ResposeEntity<String> - will return the specific according to the method logic 
+	 * @return ResposeEntity<String> - will return the specific according to the
+	 *         method logic
 	 */
 	public ResponseEntity<?> pay(Bill bill) {
 
-		try {
+		
 
 			int accountNumber = bill.getAccountNumber();
 			double billAmount = bill.getAmount();
@@ -378,70 +378,56 @@ public class BillServiceImpl implements BillService {
 					if (updatedBill != null && updatedAccount != null) {
 						return new ResponseEntity<String>(ServiceConstants.BILL_PAID_MESSAGE, HttpStatus.OK);
 					} else {
-						return new ResponseEntity<String>(ServiceConstants.BILL_PAY_EXCEPTION_MESSAGE, HttpStatus.OK);
+						return new ResponseEntity<String>(ServiceConstants.BILL_PAY_EXCEPTION_MESSAGE, HttpStatus.BAD_GATEWAY);
 					}
 
 				} else {
-					return new ResponseEntity<String>(ServiceConstants.LOW_BALANCE_MESSAGE, HttpStatus.OK);
+					return new ResponseEntity<String>(ServiceConstants.LOW_BALANCE_MESSAGE, HttpStatus.BAD_REQUEST);
 				}
 			} else {
-				return new ResponseEntity<String>(ServiceConstants.NO_USER_MESSAGE, HttpStatus.OK);
+				return new ResponseEntity<String>(ServiceConstants.NO_USER_MESSAGE, HttpStatus.BAD_REQUEST);
 			}
 
-		} catch (Exception e) {
-			
-			return new ResponseEntity<String>(ServiceConstants.GENERAL_EXCEPTION_MESSAGE,
-					HttpStatus.EXPECTATION_FAILED);
-
-		}
+		
 
 	}
 
 	/**
-	 *  updateBill(UpdateBillDTO updateBillDTO)  :method to update the bill.
-	 *  can be able to modify the amount and due date for the particular bill.
+	 * updateBill(UpdateBillDTO updateBillDTO) :method to update the bill. can be
+	 * able to modify the amount and due date for the particular bill.
 	 */
-	
+
 	@Override
 	public ResponseEntity<?> updateBill(UpdateBillDTO updateBillDTO) {
 
-		
-		try {
+		Optional<Bill> bill = billRepo.findByPrimarKey(
+				new PrimaryKeyForBill(updateBillDTO.getBillerCode(), updateBillDTO.getConsumerNumber()));
 
-			Optional<Bill> bill = billRepo.findByPrimarKey(
-					new PrimaryKeyForBill(updateBillDTO.getBillerCode(), updateBillDTO.getConsumerNumber()));
+		if (bill.isPresent() && bill.get().getStatus().equals(ServiceConstants.PENDING_STATUS)) {
 
-			if (bill.isPresent() && bill.get().getStatus().equals(ServiceConstants.PENDING_STATUS)) {
-
-				if (updateBillDTO.getAmount() > 0) {
-					bill.get().setAmount(updateBillDTO.getAmount());
-				}
-
-				if (updateBillDTO.getDueDate() != null && updateBillDTO.getDueDate().toString().trim().length() > 0) {
-					bill.get().setDueDate(updateBillDTO.getDueDate());
-				}
-
-				Bill updatedBill = billRepo.save(bill.get());
-
-				if (updatedBill != null) {
-					return new ResponseEntity<Bill>(updatedBill, HttpStatus.OK);
-				} else {
-					return new ResponseEntity<String>("Problem Occurred while updating bill", HttpStatus.OK);
-				}
-
-			} else {
-
-				if (bill.isPresent() && !bill.get().getStatus().equals(ServiceConstants.PENDING_STATUS))
-					return new ResponseEntity<String>(
-							ServiceConstants.NO_PENDING_BILLERANDCONSUMER_MESSAGE,
-							HttpStatus.OK);
-				else
-					return new ResponseEntity<String>(ServiceConstants.NO_BILL_WITH_BILLERANDCONSUMER_MESSAGE,
-							HttpStatus.OK);
+			if (updateBillDTO.getAmount() > 0) {
+				bill.get().setAmount(updateBillDTO.getAmount());
 			}
 
-		} catch (Exception e) {
-			return new ResponseEntity<String>(ServiceConstants.GENERAL_EXCEPTION_MESSAGE, HttpStatus.EXPECTATION_FAILED);
+			if (updateBillDTO.getDueDate() != null && updateBillDTO.getDueDate().toString().trim().length() > 0) {
+				bill.get().setDueDate(updateBillDTO.getDueDate());
+			}
+
+			Bill updatedBill = billRepo.save(bill.get());
+
+			if (updatedBill != null) {
+				return new ResponseEntity<Bill>(updatedBill, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<String>("Problem Occurred while updating bill", HttpStatus.BAD_GATEWAY);
+			}
+
+		} else {
+
+			if (bill.isPresent() && !bill.get().getStatus().equals(ServiceConstants.PENDING_STATUS))
+				return new ResponseEntity<String>(ServiceConstants.NO_PENDING_BILLERANDCONSUMER_MESSAGE, HttpStatus.BAD_REQUEST);
+			else
+				return new ResponseEntity<String>(ServiceConstants.NO_BILL_WITH_BILLERANDCONSUMER_MESSAGE,
+						HttpStatus.BAD_REQUEST);
 		}
 
 	}
